@@ -113,3 +113,6 @@ model@leader %>%
   mutate(gini = 2*value-1) %>%
   select(data,auc=value,gini)
 
+# Save model ----
+model@leaderboard %>% as_tibble() %>% slice(1) %>% pull(model_id) %>% 
+  h2o.getModel() %>% h2o.saveModel(path = path)
